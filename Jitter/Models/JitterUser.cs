@@ -23,5 +23,10 @@ namespace Jitter.Models
 
         public string LastName { get; set; }
         public string Picture { get; set; }
+
+        // ICollection, IEnumerable, IQueryable are other options
+        public List<Jot> Jots { get; set; }
+
+        public List<JitterUser> Following { get; set; }
     }
 }
