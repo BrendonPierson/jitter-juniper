@@ -107,6 +107,10 @@ namespace Jitter.Tests.Models
             };
 
             //mock_set.Object.AddRange(expected);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8eef5b22a4dbc24d64cbbad327f5368e595443a2
             ConectMocksToDataStore(expected);
 
             // Act
