@@ -22,7 +22,12 @@ namespace Jitter.Models
 
         public List<JitterUser> GetAllUsers()
         {
-            return null;
+            // JitterUsers is a set where the elements are rows
+            // items returned from that table are assigned to users
+            // by returning users we are returning all of the users
+            var query = from users in _context.JitterUsers select users;
+            // above is the same as -->  SELECT users.Handles FROM _context.JitterUsers AS users
+            return query.ToList();
         }
     }
 }
