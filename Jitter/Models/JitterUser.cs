@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Jitter.Models
 {
-    public class JitterUser
+    public class JitterUser : IComparable
     {
         [Key]
         public int JitterUserId { get; set; }
@@ -27,6 +27,13 @@ namespace Jitter.Models
         // ICollection, IEnumerable, IQueryable
         public List<Jot> Jots { get; set; }
         public List<JitterUser> Following { get; set; }
+
+        public int CompareTo(object obj)
+        {
+            JitterUser other_user = obj as JitterUser;
+            int answer = this.Handle.CompareTo(other_user.Handle);
+            return answer;
+        }
         //public List<JitterUser> Followers { get; set; } // Again, this is just one way to do this. Not the only way.
     }
 }
