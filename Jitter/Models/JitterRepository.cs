@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Jitter.Models
@@ -62,6 +63,43 @@ namespace Jitter.Models
             List<JitterUser> found_users = query.Where(user => user.Handle.Contains(handle)).ToList();
             found_users.Sort();
             return found_users;
+        }
+
+        public List<JitterUser> SearchByName(string searchTerm)
+        {
+            // SQL: SELECT * FROM JitterUsers AS users WHERE users.FirstName LIKE '%searchTearm%' or users.LastName LIKE '%searchTerm';
+            var query = from user in _context.JitterUsers select user;
+            List<JitterUser> found_users = query.Where(user => Regex.IsMatch(user.FirstName, searchTerm, RegexOptions.IgnoreCase) || Regex.IsMatch(user.LastName, searchTerm, RegexOptions.IgnoreCase)).ToList();
+            found_users.Sort();
+            return found_users;
+        }
+
+        public List<Jot> GetAllJots()
+        {
+            // SQL SELECT * FROM Jots
+            var query = from jot in _context.Jots select jot;
+            List<Jot> foundJots = query.ToList();
+            foundJots.Sort();
+            return foundJots;
+        }
+
+        public bool CreateJot(JitterUser jitter_user1, string content)
+        {
+            Jot a_jot = new Jot { Content = content, Date = DateTime.Now, Author = jitter_user1 };
+            bool is_added = true;
+            try
+            {
+                // hey database add a row
+                Jot added_jot = _context.Jots.Add(a_jot);
+                _context.SaveChanges();
+                // Why is this null? Are the Docs inaccurate?
+                is_added = added_jot == null ? false : true;
+            }
+            catch (Exception)
+            {
+                is_added = false;
+            }
+            return is_added;
         }
     }
 }
