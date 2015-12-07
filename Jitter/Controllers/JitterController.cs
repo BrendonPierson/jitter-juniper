@@ -17,6 +17,7 @@ namespace Jitter.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult TopFavs()
         {
             return View();
