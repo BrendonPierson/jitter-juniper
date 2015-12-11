@@ -32,6 +32,11 @@ namespace Jitter
             // How to add a new ScriptBundle
             bundles.Add(new ScriptBundle("~/Content/myjavascript").Include(
                        "~/Content/custom.js" ));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
+                        "~/Scripts/angular.js",
+                        "~/Scripts/app.module.js",
+                        "~/Scripts/TestController.js"));
         }
     }
 }

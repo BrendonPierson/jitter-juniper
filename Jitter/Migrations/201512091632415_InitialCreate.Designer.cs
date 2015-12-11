@@ -13,7 +13,7 @@ namespace Jitter.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201512071548422_InitialCreate"; }
+            get { return "201512091632415_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
